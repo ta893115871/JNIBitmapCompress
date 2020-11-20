@@ -64,9 +64,22 @@ int write_JPEG_file(BYTE *data, int w, int h, int quality,
     cinfo.image_height = h;
     cinfo.input_components = 3;           /* # of color components per pixel */
     cinfo.in_color_space = JCS_RGB;       /* colorspace of input image */
-    //是否采用哈弗曼表数据计算
+
+    /*  源码地址：
+      [http://androidos.net.cn/androidossearch?query=SkImageDecoder_libjpeg.cpp](http://androidos.net.cn/androidossearch?query=SkImageDecoder_libjpeg.cpp)
+
+      >=android 7.0 后的源码已经设置为true了
+      ...省略其它代码
+      Tells libjpeg-turbo to compute optimal Huffman coding tables
+      for the image.  This improves compression at the cost of
+      slower encode performance.
+      cinfo.optimize_coding = TRUE;
+      jpeg_set_quality(&cinfo, quality, TRUE);
+      ...省略其它代码*/
+
+
     cinfo.optimize_coding = optimize;
-    //设置哈夫曼编码，TRUE=arithmetic coding, FALSE=Huffman
+    //哈夫曼编码和算术编码，TRUE=arithmetic coding, FALSE=Huffman
     if (optimize) {
         cinfo.arith_code = false;
     } else {
