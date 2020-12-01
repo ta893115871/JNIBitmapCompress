@@ -18,8 +18,11 @@ project("jnibitmapcompress")
 include_directories(${PROJECT_SOURCE_DIR}/include)
 link_directories(../jniLibs/${ANDROID_ABI})
 
+# 日志输出在.cxx/cmake/debug//armeabi-v7a/build_output.txt
 message("PROJECT_SOURCE_DIR=${PROJECT_SOURCE_DIR}")
 message("ANDROID_ABI=${ANDROID_ABI}")
+message("CMAKE_ANDROID_ARCH_ABI=${CMAKE_ANDROID_ARCH_ABI}")
+message("CMAKE_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR}")
 
 add_library( # Sets the name of the library.
         native-lib
@@ -57,3 +60,4 @@ target_link_libraries( # Specifies the target library.
         # included in the NDK.
         ${log-lib}
         ${jnigraphics-lib})
+message("log= ${log-lib}")
